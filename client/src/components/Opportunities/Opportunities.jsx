@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Opportunities.module.css';
 import { Button, Card, Loader } from '../common';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 import http from '../../api';
 import Swal from 'sweetalert2';
 
@@ -22,7 +23,7 @@ const Opportunities = () => {
 		try {
 			http.get('/job/getJobs').then((response) => {
 				const data = response.data.jobs;
-				setLoading(false);
+				setTimeout(()=> setLoading(false), 1000) ;
 				setJobData(data);
 				setTest(data);
 			});
@@ -98,7 +99,7 @@ const Opportunities = () => {
 				<h1 className={classes.text}>Opportunities</h1>
 				{loading && (
 					<div className={classes.loader}>
-						<Loader />
+						<PacmanLoader color="#5d3fd3"size={30}/>
 					</div>
 				)}
 				{!loading && jobData.length ? (
